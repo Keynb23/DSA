@@ -3,7 +3,7 @@ import { useContextHub } from "../../../context/ContextHub";
 import Blocks from "../../Blocks/Blocks";
 import "./Bubble.css";
 
-const BUBBLE_SORT_CODE = ` 
+const BUBBLE_SORT_CODE = `
 function bubbleSort(arr) {
   const a = [...arr];
 
@@ -19,18 +19,41 @@ function bubbleSort(arr) {
 }
 `;
 
+const BUBBLE_SORT_FACTS = [
+  {
+    title: "Creation / History",
+    content: "Bubble sort is one of the oldest sorting algorithms, first described in the 1950s. Its simplicity makes it a classic teaching example."
+  },
+  {
+    title: "Common Uses",
+    content: "Used primarily for educational purposes and small datasets. Rarely used in production due to inefficiency."
+  },
+  {
+    title: "Performance",
+    content: "Best Case: O(n), Average/Worst Case: O(n²). Space Complexity: O(1). Not suitable for large datasets."
+  },
+  {
+    title: "How it Works",
+    content: "Imagine a line of students with random heights. You compare each pair and swap if the left is taller. The tallest 'bubbles' to the end. Repeat until sorted."
+  },
+  {
+    title: "Key Takeaways",
+    content: "Super easy to understand, great for visual learning, but slow for large datasets."
+  }
+];
+
 const Bubble = () => {
   const { Random } = useContextHub();
   const { numbers, setNumbers, regenerate } = Random.useRandomArray(12, 100);
 
   const [showCode, setShowCode] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
   const [activeIndices, setActiveIndices] = useState([]);
 
   const startSort = () => {
     const a = [...numbers];
     const steps = [];
 
-    // generate steps with active indices for animation
     for (let i = 0; i < a.length - 1; i++) {
       for (let j = 0; j < a.length - 1 - i; j++) {
         steps.push({ array: [...a], active: [j, j + 1] });
@@ -41,7 +64,6 @@ const Bubble = () => {
       }
     }
 
-    // animate steps
     let i = 0;
     const interval = setInterval(() => {
       if (i >= steps.length) {
@@ -52,7 +74,7 @@ const Bubble = () => {
       setNumbers(steps[i].array);
       setActiveIndices(steps[i].active);
       i++;
-    }, 500); // slower for clarity
+    }, 500);
   };
 
   return (
@@ -65,14 +87,30 @@ const Bubble = () => {
         <button onClick={() => setShowCode(!showCode)}>
           {showCode ? "Show Visualization" : "Show Code"}
         </button>
+        <button onClick={() => setShowInfo(!showInfo)}>
+          {showInfo ? "Hide Info" : "Show Info"}
+        </button>
       </div>
 
-      {!showCode ? (
+      {!showCode && !showInfo && (
         <Blocks array={numbers} activeIndices={activeIndices} />
-      ) : (
+      )}
+
+      {showCode && (
         <pre className="Code">
           <code>{BUBBLE_SORT_CODE}</code>
         </pre>
+      )}
+
+      {showInfo && (
+        <div className="InfoPanel">
+          {BUBBLE_SORT_FACTS.map((fact, idx) => (
+            <div key={idx} className="Fact">
+              <h3>{fact.title}</h3>
+              <p>{fact.content}</p>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
