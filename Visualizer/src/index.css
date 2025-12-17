@@ -1,0 +1,29 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body, html, #root {
+  height: 100%;
+  width: 100%;
+  background-color: var(--BG);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--TEXT);
+}
+
+:root {
+  --BG: #ECF7FE;
+  --Components: #FBF5F3;
+  --TEXT: #1d1d1f;
+  --Header: #1d1d1f;
+
+  --Primary: #20A4F3;
+  --Secondary: #EBE7EE;
+  --Accent: #1C559C;
+
+  --Shadow: 0 8px 24px #342A3C;
+  --Border: 1px solid #091C34;
+  --Radius: 12px;
+  --Blur: blur(20px);
+}
