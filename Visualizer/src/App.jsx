@@ -1,9 +1,10 @@
 import './App.css';
 import Bubble from './components/Sorting/BubbleSort/Bubble';
-
+import Navbar from './components/navbar/Navbar';
 const App = () => {
   return (
 <>
+<Navbar />
 <div className="app-container">
     <Bubble />
 </div>
