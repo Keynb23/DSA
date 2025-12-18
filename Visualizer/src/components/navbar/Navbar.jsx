@@ -1,27 +1,51 @@
 import './Navbar.css';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <div className="nav-container">
       <nav className="navbar">
-        <div className="nav-brand">DSA Visualizer</div>
+        <div className="nav-brand">
+          <NavLink id="NavLink" to="/">DSA Visualizer</NavLink>
+          </div>
 
         <ul className="Nav-Links">
-          <li className="Nav-Link">Home</li>
+          <li className="Nav-Link">
+            <NavLink id="NavLink" to="/" end>Home</NavLink>
+          </li>
 
           {/* Data Structures Dropdown */}
           <li className="Nav-Link dropdown-container">
             <span>Data Structures ▾</span>
             <ul className="DS-Menu">
-              <li className="DS-Dropdown">Primitive Data</li>
-              <li className="DS-Dropdown">Linear Data</li>
-              <li className="DS-Dropdown">Hash-Based Data</li>
-              <li className="DS-Dropdown">Tree Data</li>
-              <li className="DS-Dropdown">Graph Data</li>
-              <li className="DS-Dropdown">Set & Disjoint Data</li>
-              <li className="DS-Dropdown">Heap & Priority</li>
-              <li className="DS-Dropdown">String Data</li>
-              <li className="DS-Dropdown">Advanced / Specialized</li>
+              {/* DS-Dropdowns are all navlinks to a specific page */}
+              <li className="DS-Dropdown">
+                <NavLink id="NavLink" to="/data-structures/primitive">Primitive Data</NavLink>
+              </li>
+              <li className="DS-Dropdown">
+                <NavLink id="NavLink" to="/data-structures/linear">Linear Data</NavLink>
+              </li>
+              <li className="DS-Dropdown">
+                <NavLink id="NavLink" to="/data-structures/hash-based">Hash-Based Data</NavLink>
+              </li>
+              <li className="DS-Dropdown">
+                <NavLink id="NavLink" to="/data-structures/tree">Tree Data</NavLink>
+              </li>
+              <li className="DS-Dropdown">
+                <NavLink id="NavLink" to="/data-structures/graph">Graph Data</NavLink>
+              </li>
+              <li className="DS-Dropdown">
+                <NavLink id="NavLink" to="/data-structures/set-disjoint">Set & Disjoint Data</NavLink>
+              </li>
+              <li className="DS-Dropdown">
+                <NavLink id="NavLink" to="/data-structures/heap-priority">Heap & Priority</NavLink>
+              </li>
+              <li className="DS-Dropdown">
+                <NavLink id="NavLink" to="/data-structures/string">String Data</NavLink>
+              </li>
+              <li className="DS-Dropdown">
+                <NavLink id="NavLink" to="/data-structures/advanced">Advanced / Specialized</NavLink>
+              </li>
             </ul>
           </li>
 
@@ -29,19 +53,45 @@ const Navbar = () => {
           <li className="Nav-Link dropdown-container">
             <span>Algorithms ▾</span>
             <ul className="Algo-Menu">
-              <li className="Al-Dropdown">Sorting</li>
-              <li className="Al-Dropdown">Searching</li>
-              <li className="Al-Dropdown">Graph</li>
-              <li className="Al-Dropdown">Tree</li>
-              <li className="Al-Dropdown">Dynamic Programming</li>
-              <li className="Al-Dropdown">Greedy</li>
-              <li className="Al-Dropdown">Backtracking</li>
-              <li className="Al-Dropdown">Divide and Conquer</li>
-              <li className="Al-Dropdown">Bit Manipulation</li>
-              <li className="Al-Dropdown">Mathematical</li>
-              <li className="Al-Dropdown">String</li>
-              <li className="Al-Dropdown">Randomized</li>
-              <li className="Al-Dropdown">Optimization & AI</li>
+              {/* Al-Dropdowns are all navlinks to a specific page */}
+              <li className="Al-Dropdown">
+                <NavLink id="NavLink" to="/algorithms/sorting">
+                Sorting</NavLink></li>
+              <li className="Al-Dropdown">
+                <NavLink id="NavLink" to="/algorithms/searching">
+                Searching</NavLink></li>
+              <li className="Al-Dropdown">
+                <NavLink id="NavLink" to="/algorithms/graph">
+                Graph</NavLink></li>
+              <li className="Al-Dropdown">
+                <NavLink id="NavLink" to="/algorithms/tree">
+                Tree</NavLink></li>
+              <li className="Al-Dropdown">
+                <NavLink id="NavLink" to="/algorithms/dynamic-programming">
+                Dynamic Programming</NavLink></li>
+              <li className="Al-Dropdown">
+                <NavLink id="NavLink" to="/algorithms/greedy">
+                Greedy</NavLink></li>
+              <li className="Al-Dropdown">
+                <NavLink id="NavLink" to="/algorithms/backtracking">
+                Backtracking</NavLink></li>
+              <li className="Al-Dropdown">
+                <NavLink id="NavLink" to="/algorithms/divide-and-conquer">
+                Divide and Conquer</NavLink></li>
+              <li className="Al-Dropdown">
+                <NavLink id="NavLink" to="/algorithms/bit-manipulation">
+                Bit Manipulation</NavLink></li>
+              <li className="Al-Dropdown">
+                <NavLink id="NavLink" to="/algorithms/mathematical">
+                Mathematical</NavLink></li>
+              <li className="Al-Dropdown">
+                <NavLink id="NavLink" to="/algorithms/string">
+                String</NavLink></li>
+              <li className="Al-Dropdown">
+                <NavLink id="NavLink" to="/algorithms/randomized">
+                Randomized</NavLink></li>
+              <li className="Al-Dropdown">
+                <NavLink id="NavLink" to="/algorithms/Optimization & AI">Optimization & AI</NavLink></li>
             </ul>
           </li>
         </ul>

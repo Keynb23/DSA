@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useContextHub } from "../../../context/ContextHub";
-import Blocks from "../../Blocks/Blocks";
+import Blocks from "../../../components/Blocks/Blocks";
 import "./Bubble.css";
 
 const BUBBLE_SORT_CODE = `
