@@ -3,132 +3,132 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%; /* Spans full height of Viewer */
+  height: 100%;
   background-color: var(--Components);
   border-radius: var(--Radius);
   box-shadow: var(--Shadow);
   overflow: hidden;
+  padding: 0.5rem;
 }
 
 .Algorithm-Header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: 1.2rem 2rem;
   background-color: white;
   border-bottom: 2px solid var(--Secondary);
+  z-index: 10;
 }
+
+/* ... (Top of file stays the same) */
 
 .Algorithm-Stage {
   display: flex;
-  flex: 1; /* Takes remaining height */
+  flex: 1;
+  min-height: 0; /* REQUIRED: prevents content from pushing the container's height */
   overflow: hidden;
 }
 
-/* Visualization Column */
-.Visualizer-Section {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  background-color: var(--BG);
-}
-
-/* Reference Column (Static Width) */
 .Reference-Panel {
   width: 400px;
+  min-width: 400px;
+  max-width: 400px;
   border-left: 2px solid var(--Secondary);
   display: flex;
   flex-direction: column;
   background-color: white;
+  height: 100%; /* Fill the stage height */
 }
 
 .Panel-Toggles {
   display: flex;
-  border-bottom: 1px solid var(--Secondary);
-}
-
-.Panel-Toggles button {
-  flex: 1;
-  padding: 1rem;
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-weight: 600;
-  color: var(--TEXT);
-  transition: 0.3s;
-}
-
-.Panel-Toggles button.active {
-  background-color: var(--BG);
-  color: var(--Accent);
-  border-bottom: 3px solid var(--Accent);
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.75rem;
+  gap: 1rem;
 }
 
 .Panel-Content {
-  padding: 1.5rem;
-  overflow-y: auto;
   flex: 1;
-}
-/* Speed Selector Styles */
-
-.speed-select {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--Secondary);
-  background-color: white;
-  color: var(--TEXT);
-  font-weight: 500;
-  cursor: pointer;
-  outline: none;
+  min-height: 0; /* Allows this specific area to shrink and scroll */
+  display: flex;
+  flex-direction: column;
 }
 
-.speed-select:hover {
-  border-color: var(--Primary);
+.Scroll-Box {
+  flex: 1;
+  overflow-y: auto; /* Internal scroll only */
+  padding: 1.5rem;
+  /* Optional: adds a nice fade at the top/bottom so you know there's more content */
+  mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
 }
 
-/* Universal Code and Fact Styles */
 .DSA_Code {
   font-family: "Fira Code", monospace;
-  font-size: 0.85rem;
-  line-height: 1.5;
+  font-size: 0.8rem; /* Slightly smaller for better fit */
+  line-height: 1.6;
   color: var(--Accent);
   white-space: pre-wrap;
+  word-break: break-word;
+  background: var(--BG);
+  padding: 1rem;
+  border-radius: 8px;
 }
 
+/* ... (Rest of styles) */
+
+/* Fact Styles */
 .Fact-Item {
   margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--Secondary);
 }
 
 .Fact-Item h4 {
   color: var(--Accent);
   font-size: 0.95rem;
   margin-bottom: 0.4rem;
+  font-weight: 700;
 }
 
 .Fact-Item p {
   font-size: 0.85rem;
-  line-height: 1.4;
+  line-height: 1.5;
+  color: var(--TEXT);
+}
+
+/* Controls & Buttons */
+.Controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .btn-primary,
 .btn-secondary {
-  padding: 10px 22px;
-  font-size: 15px;
-  font-weight: 500;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
   border-radius: 10px;
   border: none;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
   background-color: var(--Primary);
   color: #ffffff;
-  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.Controls {
-  display: flex;
-  justify-content: center;
-  gap: .5rem;
-  margin-bottom: 30px;
+.btn-secondary {
+  background-color: var(--Secondary);
+  color: var(--TEXT);
 }
 
+.speed-select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--Secondary);
+  font-weight: 500;
+}

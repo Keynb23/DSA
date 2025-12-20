@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import Bubble from './BubbleSort/Bubble';
+import Selection from './SelectionSort/Selection';
+import Insertion from './InsertionSort/Insertion';
+import CocktailShaker from './CocktailShakerSort/CocktailShaker';
 import './Sorting.css'; 
 
 const Sorting = () => {
@@ -9,6 +12,7 @@ const Sorting = () => {
     { id: 'bubble', name: 'Bubble Sort' },
     { id: 'selection', name: 'Selection Sort' },
     { id: 'insertion', name: 'Insertion Sort' },
+    { id: 'cocktail-shaker', name: 'Cocktail Shaker Sort' },
   ];
 
   return (
@@ -31,8 +35,10 @@ const Sorting = () => {
       <main className="Content">
         <div className="Al-Ds-Viewer">
           {selectedAlgo === 'bubble' && <Bubble />}
-          {selectedAlgo === 'selection' && <div>Selection Sort (Coming Soon)</div>}
-        </div>
+          {selectedAlgo === 'selection' && <Selection />}
+          {selectedAlgo === 'insertion' && <Insertion />}
+          {selectedAlgo === 'cocktail-shaker' && <CocktailShaker />}
+          </div>
       </main>
     </div>
   );

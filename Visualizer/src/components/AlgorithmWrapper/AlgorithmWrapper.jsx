@@ -3,6 +3,8 @@ import { useContextHub } from "../../context/ContextHub";
 import Blocks from "../Blocks/Blocks";
 import "./AlgorithmWrapper.css";
 
+// ... (imports remain the same)
+
 const AlgorithmWrapper = ({ title, code, facts, onAction, actionLabel, onReset, onRestart, children }) => {
   const { speed, setSpeed } = useContextHub();
   const [panelView, setPanelView] = useState("code");
@@ -27,23 +29,32 @@ const AlgorithmWrapper = ({ title, code, facts, onAction, actionLabel, onReset, 
       </header>
 
       <div className="Algorithm-Stage">
-        <div className="Visualizer-Section"><Blocks /></div>
+        <div className="Visualizer-Section">
+          <Blocks />
+        </div>
+        
         <aside className="Reference-Panel">
           <div className="Panel-Toggles">
-            <button className={panelView === "code" ? "active" : ""} onClick={() => setPanelView("code")}>Code</button>
-            <button className={panelView === "facts" ? "active" : ""} onClick={() => setPanelView("facts")}>Facts</button>
+            <button className={panelView === "code" ? "btn-primary" : "btn-secondary"} onClick={() => setPanelView("code")}>Code</button>
+            <button className={panelView === "facts" ? "btn-primary" : "btn-secondary"} onClick={() => setPanelView("facts")}>Facts</button>
           </div>
+          
           <div className="Panel-Content">
             {panelView === "code" ? (
-              <pre className="DSA_Code"><code>{code}</code></pre>
+              /* Wrapped in a scroll-container */
+              <div className="Scroll-Box">
+                <pre className="DSA_Code"><code>{code}</code></pre>
+              </div>
             ) : (
-              <div className="DSA_Facts">
-                {facts.map((f, i) => (
-                  <div key={i} className="Fact-Item">
-                    <h4>{f.title}</h4>
-                    <p>{f.content}</p>
-                  </div>
-                ))}
+              <div className="Scroll-Box">
+                <div className="DSA_Facts">
+                  {facts.map((f, i) => (
+                    <div key={i} className="Fact-Item">
+                      <h4>{f.title}</h4>
+                      <p>{f.content}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>

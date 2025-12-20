@@ -1,23 +1,29 @@
+/* src/components/navbar/Navbar.css */
+
 .nav-container {
   width: 100%;
   display: flex;
   justify-content: center;
   padding: 1rem 0;
   z-index: 1000;
+  position: relative;
 }
 
 .navbar {
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: var(--Blur);
   -webkit-backdrop-filter: var(--Blur);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+    rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+    rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
   border-radius: 16px;
-  border: var(--Border);
   padding: 1rem 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 90%;
   max-width: 1200px;
+  z-index: 1000;
 }
 
 .nav-brand {
@@ -34,98 +40,103 @@
   margin: 0;
   padding: 0;
   align-items: center;
-  z-index: 1000;
 }
 
 .Nav-Link {
-  color: white;
-  cursor: pointer;
+  position: relative; /* Anchor for the underline */
+}
+
+/* Changed from #NavLink to .NavLink */
+.NavLink {
+  text-decoration: none;
+  color: #ffffff;
   font-weight: 600;
   font-size: 1.1rem;
   transition: color 0.3s ease;
   position: relative;
+  display: flex; /* Changed from inline-block */
+  align-items: center; /* Vertically center text */
+  width: 100%; /* Fill the parent's width */
+  height: 100%; /* Fill the parent's height */
 }
 
-.Nav-Link:hover {
-  color: var(--Primary);
+.NavLink:hover {
+  color: var(--Secondary);
 }
 
-#NavLink {
-  text-decoration: none;
-  color: #ffffff;
-}
-
-#NavLink:hover {
-  color: var(--Primary);
-}
-
-#NavLink:visited {
-  color: var(--Primary);
-}
-
-#NavLink:active {
-  color: var(--Primary);
-}
-
-#NavLink:focus {
-  outline: none;
-}
-
-#NavLink:before {
-  content: '';
+/* The fixed underline logic */
+.Nav-Links .NavLink::before {
+  content: "";
   position: absolute;
-  bottom: -2px;
+  bottom: -4px;
   left: 0;
-  width: 100%;
+  width: 0;
   height: 2px;
   background-color: var(--Primary);
+  transition: width 0.3s ease;
 }
 
-/* Dropdown container */
+.Nav-Links .NavLink:hover::before,
+.Nav-Links .NavLink.active::before {
+  width: 100%;
+}
+
+/* BRAND SPECIFIC: Remove underline from brand */
+.brand-text::before {
+  display: none !important;
+}
+
+/* Dropdown styling */
 .dropdown-container {
   position: relative;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
-/* Hide menus by default */
 .DS-Menu,
 .Algo-Menu {
   position: absolute;
-  top: 100%;              /* NO GAP */
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(11, 11, 11, 0.88);
+  background: rgba(11, 11, 11, 0.95);
   backdrop-filter: var(--Blur);
-  border: var(--Border);
   border-radius: var(--Radius);
-  box-shadow: var(--Shadow);
   padding: 1rem;
   min-width: 220px;
-  z-index: 1000;
-  display: none;          /* KEY */
+  display: none;
   flex-direction: column;
   gap: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Show on hover */
 .dropdown-container:hover .DS-Menu,
 .dropdown-container:hover .Algo-Menu {
   display: flex;
 }
 
-/* Dropdown items */
 .DS-Dropdown,
 .Al-Dropdown {
   list-style: none;
-  padding: 0.75rem 1rem;
-  color: white;
-  font-size: 0.95rem;
+  padding: 0; /* Remove the padding from here */
   border-radius: 8px;
-  white-space: nowrap;
-  transition: background 0.2s ease;
+  overflow: hidden; /* Ensure the link hover background matches corners */
 }
 
 .DS-Dropdown:hover,
 .Al-Dropdown:hover {
   background: var(--Primary);
-  color: white;
+}
+
+.DS-Dropdown .NavLink,
+.Al-Dropdown .NavLink {
+  padding: 0.75rem 1rem;
+}
+
+/* Prevent underline inside dropdowns */
+.DS-Dropdown .NavLink::before,
+.Al-Dropdown .NavLink::before {
+  display: none;
 }
