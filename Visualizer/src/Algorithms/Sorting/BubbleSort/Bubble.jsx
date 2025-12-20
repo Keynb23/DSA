@@ -1,12 +1,11 @@
-import { useState } from "react";
+// /src/Algorithms/Sorting/BubbleSort/Bubble.jsx
+import { useEffect } from "react";
 import { useContextHub } from "../../../context/ContextHub";
-import Blocks from "../../../components/Blocks/Blocks";
-import "./Bubble.css";
+import AlgorithmWrapper from "../../../components/AlgorithmWrapper/AlgorithmWrapper";
 
-const BUBBLE_SORT_CODE = `
+const BUBBLE_CODE = `
 function bubbleSort(arr) {
   const a = [...arr];
-
   for (let i = 0; i < a.length - 1; i++) {
     for (let j = 0; j < a.length - 1 - i; j++) {
       if (a[j] > a[j + 1]) {
@@ -14,12 +13,11 @@ function bubbleSort(arr) {
       }
     }
   }
-
   return a;
 }
 `;
 
-const BUBBLE_SORT_FACTS = [
+const BUBBLE_FACTS = [
   {
     title: "Creation / History",
     content: "Bubble sort is one of the oldest sorting algorithms, first described in the 1950s. Its simplicity makes it a classic teaching example."
@@ -43,76 +41,50 @@ const BUBBLE_SORT_FACTS = [
 ];
 
 const Bubble = () => {
-  const { Random } = useContextHub();
-  const { numbers, setNumbers, regenerate } = Random.useRandomArray(12, 100);
+  const { array, setArray, setActiveIndices, generateNewArray, restartCurrent, speed, timerRef, stopAnimation } = useContextHub();
 
-  const [showCode, setShowCode] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
-  const [activeIndices, setActiveIndices] = useState([]);
+  useEffect(() => {
+    if (array.length === 0) generateNewArray(12, 100);
+    return () => stopAnimation(); // Cleanup on leave
+  }, [generateNewArray, stopAnimation, array.length]);
 
   const startSort = () => {
-    const a = [...numbers];
-    const steps = [];
+    stopAnimation();
+    let a = [...array];
+    let steps = [];
 
     for (let i = 0; i < a.length - 1; i++) {
-      for (let j = 0; j < a.length - 1 - i; j++) {
-        steps.push({ array: [...a], active: [j, j + 1] });
+      for (let j = 0; j < a.length - i - 1; j++) {
+        steps.push({ currentArray: [...a], active: [j, j + 1] });
         if (a[j] > a[j + 1]) {
           [a[j], a[j + 1]] = [a[j + 1], a[j]];
-          steps.push({ array: [...a], active: [j, j + 1] });
+          steps.push({ currentArray: [...a], active: [j, j + 1] });
         }
       }
     }
 
     let i = 0;
-    const interval = setInterval(() => {
+    timerRef.current = setInterval(() => {
       if (i >= steps.length) {
-        setActiveIndices([]);
-        clearInterval(interval);
+        stopAnimation();
         return;
       }
-      setNumbers(steps[i].array);
+      setArray(steps[i].currentArray);
       setActiveIndices(steps[i].active);
       i++;
-    }, 500);
+    }, speed);
   };
 
   return (
-    <div className="Bubble">
-      <h2>Bubble Sort</h2>
-
-      <div className="Controls">
-        <button onClick={regenerate}>New Array</button>
-        <button onClick={startSort}>Sort</button>
-        <button onClick={() => setShowCode(!showCode)}>
-          {showCode ? "Show Visualization" : "Show Code"}
-        </button>
-        <button onClick={() => setShowInfo(!showInfo)}>
-          {showInfo ? "Hide Info" : "Show Info"}
-        </button>
-      </div>
-
-      {!showCode && !showInfo && (
-        <Blocks array={numbers} activeIndices={activeIndices} />
-      )}
-
-      {showCode && (
-        <pre className="Code">
-          <code>{BUBBLE_SORT_CODE}</code>
-        </pre>
-      )}
-
-      {showInfo && (
-        <div className="InfoPanel">
-          {BUBBLE_SORT_FACTS.map((fact, idx) => (
-            <div key={idx} className="Fact">
-              <h3>{fact.title}</h3>
-              <p>{fact.content}</p>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+    <AlgorithmWrapper 
+      title="Bubble Sort"
+      actionLabel="Run Animation"
+      onAction={startSort}
+      onReset={() => generateNewArray(12, 100)}
+      onRestart={restartCurrent}
+      code={BUBBLE_CODE}
+      facts={BUBBLE_FACTS}
+    />
   );
 };
 

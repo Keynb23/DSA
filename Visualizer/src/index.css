@@ -1,3 +1,5 @@
+/* index.css(global styles) */
+
 * {
   padding: 0;
   margin: 0;
@@ -14,14 +16,14 @@ body, html, #root {
 
 :root {
   --BG: #ECF7FE;
-  --Components: #FBF5F3;
+  --Components: #f6ffff;
   --TEXT: #1d1d1f;
   --Header: #1d1d1f;
   --Primary: #20A4F3;
   --Secondary: #EBE7EE;
   --Accent: #1C559C;
-  --Shadow: 0 8px 24px #342A3C;
-  --Border: 1px solid #091C34;
+  --Shadow: 0 8px 12px #06214857;
+  --Border: #091C34;
   --Radius: 12px;
   --Blur: blur(20px);
 }
