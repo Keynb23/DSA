@@ -6,24 +6,26 @@
   box-sizing: border-box;
 }
 
-body, html, #root {
+body,
+html,
+#root {
   height: 100%;
   width: 100%;
   background-color: var(--BG);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: var(--TEXT);
 }
 
 :root {
-  --BG: #ECF7FE;
+  --BG: #ecf7fe;
   --Components: #f6ffff;
   --TEXT: #1d1d1f;
   --Header: #1d1d1f;
-  --Primary: #20A4F3;
-  --Secondary: #EBE7EE;
-  --Accent: #1C559C;
+  --Primary: #20a4f3;
+  --Secondary: #ebe7ee;
+  --Accent: #1c559c;
   --Shadow: 0 8px 12px #06214857;
-  --Border: #091C34;
+  --Border: #091c34;
   --Radius: 12px;
   --Blur: blur(20px);
 }
