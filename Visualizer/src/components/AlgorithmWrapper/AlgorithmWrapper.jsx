@@ -1,66 +1,101 @@
-import { useState } from "react";
 import { useContextHub } from "../../context/ContextHub";
 import Blocks from "../Blocks/Blocks";
 import "./AlgorithmWrapper.css";
+import { useState } from "react";
 
-// ... (imports remain the same)
-
-const AlgorithmWrapper = ({ title, code, facts, onAction, actionLabel, onReset, onRestart, children }) => {
+const AlgorithmWrapper = ({
+  title,
+  code,
+  facts,
+  onAction,
+  actionLabel,
+  onReset,
+  onRestart,
+  children,
+}) => {
   const { speed, setSpeed } = useContextHub();
-  const [panelView, setPanelView] = useState("code");
+  const [hoverIndex, setHoverIndex] = useState(null);
 
   return (
-    <div className="Algorithm-Container">
-      <header className="Algorithm-Header">
-        <div className="Header-Left"><h2>{title}</h2></div>
-        <div className="Header-Right">
-          <div className="Controls">
-            <select className="speed-select" value={speed} onChange={(e) => setSpeed(Number(e.target.value))}>
-              <option value={1000}>Slow</option>
-              <option value={200}>Normal</option>
-              <option value={0}>Real World</option>
-            </select>
-            <button className="btn-secondary" onClick={onReset}>New Data</button>
-            <button className="btn-secondary" onClick={onRestart}>Restart</button>
-            <button className="btn-primary" onClick={onAction}>{actionLabel}</button>
-            {children}
-          </div>
-        </div>
-      </header>
+    <>
+      <div className="Algorithm-Layout">
+        {/* Main Container: Header + Stage + Code */}
+        <div className="Algorithm-Container">
+          <header className="Algorithm-Header">
+            <div className="Header-Left">
+              <h2>{title}</h2>
+            </div>
+            <div className="Header-Right">
+              <div className="Controls">
+                <select
+                  className="speed-select"
+                  value={speed}
+                  onChange={(e) => setSpeed(Number(e.target.value))}
+                >
+                  <option value={1000}>Slow</option>
+                  <option value={200}>Normal</option>
+                  <option value={0}>Real World</option>
+                </select>
+                <button className="btn-secondary" onClick={onReset}>
+                  New Data
+                </button>
+                <button className="btn-secondary" onClick={onRestart}>
+                  Restart
+                </button>
+                <button className="btn-primary" onClick={onAction}>
+                  {actionLabel}
+                </button>
+                {children}
+              </div>
+            </div>
+          </header>
 
-      <div className="Algorithm-Stage">
-        <div className="Visualizer-Section">
-          <Blocks />
-        </div>
-        
-        <aside className="Reference-Panel">
-          <div className="Panel-Toggles">
-            <button className={panelView === "code" ? "btn-primary" : "btn-secondary"} onClick={() => setPanelView("code")}>Code</button>
-            <button className={panelView === "facts" ? "btn-primary" : "btn-secondary"} onClick={() => setPanelView("facts")}>Facts</button>
+          <div className="Algorithm-Stage">
+            <Blocks />
           </div>
-          
+        </div>
+
+        {/* Persistent Fact Panel on the right of the screen */}
+        <aside className="Reference-Panel">
           <div className="Panel-Content">
-            {panelView === "code" ? (
-              /* Wrapped in a scroll-container */
-              <div className="Scroll-Box">
-                <pre className="DSA_Code"><code>{code}</code></pre>
+            <div className="Scroll-Box">
+              <h3 className="FC-Panel_Title">Facts</h3>
+              <div className="DSA_Facts">
+                {facts.map((f, i) => (
+                  <div key={i} className="Fact-Item">
+                    <h4>{f.title}</h4>
+                    <p>{f.content}</p>
+                  </div>
+                ))}
               </div>
-            ) : (
-              <div className="Scroll-Box">
-                <div className="DSA_Facts">
-                  {facts.map((f, i) => (
-                    <div key={i} className="Fact-Item">
-                      <h4>{f.title}</h4>
-                      <p>{f.content}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+            </div>
           </div>
         </aside>
+
+        <div className="Panel-Content Code-Area">
+          <div className="Scroll-Box">
+            <h3 className="FC-Panel_Title">Code</h3>
+            <pre className="DSA_Code" onMouseLeave={() => setHoverIndex(null)}>
+              <code>
+                {code.split("").map((char, index) => (
+                  <span
+                    key={index}
+                    onMouseEnter={() => setHoverIndex(index)}
+                    className={
+                      hoverIndex !== null && index <= hoverIndex
+                        ? "code-highlight"
+                        : ""
+                    }
+                  >
+                    {char}
+                  </span>
+                ))}
+              </code>
+            </pre>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,119 +1,156 @@
-/* /src/components/AlgorithmWrapper/AlgorithmWrapper.css */
-.Algorithm-Container {
+/* Container for the whole page view */
+.Algorithm-Layout {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap; /* Allows the code area to drop to a new line */
   width: 100%;
   height: 100%;
+  gap: 1.5rem; 
+  overflow-y: auto; /* Allows scrolling if the combined height exceeds viewport */
+  padding-bottom: 2rem;
+}
+
+/* Main Container: Header + Stage */
+.Algorithm-Container {
+  flex: 1; /* Takes up remaining space next to the panel */
+  min-width: 600px;
+  display: flex;
+  flex-direction: column;
   background-color: var(--Components);
   border-radius: var(--Radius);
   box-shadow: var(--Shadow);
-  overflow: hidden;
-  padding: 0.5rem;
+  border: 1px solid var(--Secondary);
+  height: 600px; /* Fixed height for the visualizer portion */
 }
 
 .Algorithm-Header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1rem 2rem;
   background-color: white;
   border-bottom: 2px solid var(--Secondary);
-  z-index: 10;
+  border-radius: var(--Radius) var(--Radius) 0 0;
 }
-
-/* ... (Top of file stays the same) */
 
 .Algorithm-Stage {
-  display: flex;
   flex: 1;
-  min-height: 0; /* REQUIRED: prevents content from pushing the container's height */
-  overflow: hidden;
-}
-
-.Reference-Panel {
-  width: 400px;
-  min-width: 400px;
-  max-width: 400px;
-  border-left: 2px solid var(--Secondary);
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  height: 100%; /* Fill the stage height */
-}
-
-.Panel-Toggles {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0.75rem;
-  gap: 1rem;
+  background-color: var(--BG);
+  min-height: 0;
+}
+
+/* Standalone Sidebar on the right */
+.Reference-Panel {
+  width: 400px;
+  min-width: 400px;
+  background-color: var(--Components);
+  border-radius: var(--Radius);
+  box-shadow: var(--Shadow);
+  border: 1px solid var(--Secondary);
+  display: flex;
+  flex-direction: column;
+  height: 600px; /* Matches Algorithm-Container height */
+}
+
+/* Code Area: Positioned below because of flex-wrap */
+.Code-Area {
+  flex-basis: 100%; /* Forces it to take its own row */
+  background-color: var(--Components);
+  border-radius: var(--Radius);
+  box-shadow: var(--Shadow);
+  border: 1px solid var(--Secondary);
+  min-height: 300px;
 }
 
 .Panel-Content {
-  flex: 1;
-  min-height: 0; /* Allows this specific area to shrink and scroll */
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .Scroll-Box {
   flex: 1;
-  overflow-y: auto; /* Internal scroll only */
+  overflow-y: auto;
   padding: 1.5rem;
-  /* Optional: adds a nice fade at the top/bottom so you know there's more content */
-  mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
+}
+
+/* Standardized scrollbar for Scroll-Box */
+.Scroll-Box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.Scroll-Box::-webkit-scrollbar-thumb {
+  background: var(--Secondary);
+  border-radius: 10px;
 }
 
 .DSA_Code {
   font-family: "Fira Code", monospace;
-  font-size: 0.8rem; /* Slightly smaller for better fit */
+  font-size: 0.9rem;
   line-height: 1.6;
-  color: var(--Accent);
-  white-space: pre-wrap;
-  word-break: break-word;
-  background: var(--BG);
-  padding: 1rem;
-  border-radius: 8px;
+  white-space: pre;
+  background: var(--Components);
+  padding: 1.5rem;
+  border-radius: var(--Radius);
+  border: 1px solid var(--Secondary);
 }
 
-/* ... (Rest of styles) */
+code {
+  font-family: "Fira Code", monospace;
+  font-size: 1rem;
+  line-height: 1.25;
+  transition: all 0.3s ease;
+  color: var(--TEXT);
+}
 
-/* Fact Styles */
+.code-highlight {
+  background-color: var(--Header);
+  color: var(--Primary);
+}
+
 .Fact-Item {
   margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--Secondary);
+  padding: 1.2rem;
+  background-color: var(--BG);
+  border-radius: var(--Radius);
+  box-shadow: var(--Shadow);
+  border: 1px solid var(--Secondary);
+  transition: all 0.3s ease;
+}
+
+.Fact-Item:hover {
+  background-color: var(--Secondary);
+  color: var(--Accent);
 }
 
 .Fact-Item h4 {
   color: var(--Accent);
-  font-size: 0.95rem;
-  margin-bottom: 0.4rem;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
   font-weight: 700;
 }
 
-.Fact-Item p {
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: var(--TEXT);
-}
-
-/* Controls & Buttons */
 .Controls {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .btn-primary,
 .btn-secondary {
-  padding: 10px 18px;
+  padding: 10px 20px;
   font-size: 14px;
-  font-weight: 600;
-  border-radius: 10px;
+  font-weight: 700;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+  opacity: 0.9;
 }
 
 .btn-primary {
@@ -123,12 +160,28 @@
 
 .btn-secondary {
   background-color: var(--Secondary);
-  color: var(--TEXT);
+  color: var(--Accent);
 }
 
 .speed-select {
   padding: 8px 12px;
   border-radius: 8px;
-  border: 1px solid var(--Secondary);
-  font-weight: 500;
+  border: 2px solid var(--Secondary);
+  font-weight: 600;
+  outline: none;
 }
+
+.FC-Panel_Title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--Secondary);
+  font-weight: 700;
+  color: var(--Accent);
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: .5rem 0 1rem;
+}
+

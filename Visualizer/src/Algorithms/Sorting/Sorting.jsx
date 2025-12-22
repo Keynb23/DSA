@@ -3,6 +3,7 @@ import Bubble from './BubbleSort/Bubble';
 import Selection from './SelectionSort/Selection';
 import Insertion from './InsertionSort/Insertion';
 import CocktailShaker from './CocktailShakerSort/CocktailShaker';
+import Merge from './MergeSort/Merge';
 import './Sorting.css'; 
 
 const Sorting = () => {
@@ -13,9 +14,10 @@ const Sorting = () => {
     { id: 'selection', name: 'Selection Sort' },
     { id: 'insertion', name: 'Insertion Sort' },
     { id: 'cocktail-shaker', name: 'Cocktail Shaker Sort' },
+    { id: 'merge', name: 'Merge Sort' },
   ];
 
-  return (
+  return (  
     <div className="Dashboard">
       <aside className="Sidebar">
         <h3 className="Sidebar-Title">Sorting</h3>
@@ -38,7 +40,8 @@ const Sorting = () => {
           {selectedAlgo === 'selection' && <Selection />}
           {selectedAlgo === 'insertion' && <Insertion />}
           {selectedAlgo === 'cocktail-shaker' && <CocktailShaker />}
-          </div>
+          {selectedAlgo === 'merge' && <Merge />}
+        </div>
       </main>
     </div>
   );

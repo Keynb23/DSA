@@ -1,23 +1,24 @@
+/* /src/Algorithms/Sorting/Sorting.css */
+
 .Dashboard {
   display: flex;
   width: 100%;
-  height: calc(100vh - 80px); /* Height minus Navbar */
+  min-width: 100vh;
+  height: calc(100vh - 80px); 
   background-color: var(--BG);
+  padding: 1rem;
 }
 
 .Sidebar {
   width: 280px;
+  min-width: 280px;
   background-color: var(--Components);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 1rem;
+  box-shadow: var(--Shadow);
+  border-radius: var(--Radius);
   padding: 2rem 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  -webkit-border-radius: 1rem;
-  -moz-border-radius: 1rem;
-  -ms-border-radius: 1rem;
-  -o-border-radius: 1rem;
 }
 
 .Sidebar-Title {
@@ -46,24 +47,23 @@
 
 .Sidebar li:hover {
   background-color: var(--Secondary);
+  color: var(--Accent);
 }
 
 .Sidebar li.active {
   background-color: var(--Accent);
   color: white;
   box-shadow: 0 4px 12px rgba(28, 85, 156, 0.3);
-  border-radius: 1rem;
-  -webkit-border-radius: 1rem;
-  -moz-border-radius: 1rem;
-  -ms-border-radius: 1rem;
-  -o-border-radius: 1rem;
+  border-radius: var(--Radius);
 }
 
 .Al-Ds-Viewer {
   flex-grow: 1;
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Start from top but centered */
-  padding: 40px;
+  align-items: flex-start; 
+  padding: 20px;
   overflow-y: auto;
+  min-height: 0; /* Ensures the viewer respects the flex container height */
 }
