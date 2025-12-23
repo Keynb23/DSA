@@ -1,19 +1,13 @@
 import { useParams } from "react-router-dom";
 import Sorting from "@algorithms/Sorting/Sorting"; 
-
-// Future Modules (Ready for when you create the files)
-// import Searching from "@algorithms/Searching/Searching";
-// import Graph from "@algorithms/Graph/Graph";
-
+import Searching from "@algorithms/Searching/Searching";
+  
 const Algorithms = () => {
   const { category } = useParams();
 
   const algoMap = {
     sorting: <Sorting />, 
-    // "searching": <Searching />,
-    // "graph": <Graph />,
-    // "tree": <Tree />,
-    // "dynamic-programming": <DynamicProgramming />,
+    searching: <Searching />,
   };
 
   return (

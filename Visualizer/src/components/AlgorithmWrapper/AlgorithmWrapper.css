@@ -185,3 +185,72 @@ code {
   margin: .5rem 0 1rem;
 }
 
+.target-input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 2px solid var(--Secondary);
+  font-weight: 600;
+  width: 80px;
+  outline: none;
+  text-align: center;
+}
+
+.target-input:focus {
+  border-color: var(--Primary);
+}
+
+/* Removes arrows from number input */
+.target-input::-webkit-outer-spin-button,
+.target-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.target-input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.Search-Result {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  border-radius: var(--Radius);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 700;
+  box-shadow: var(--Shadow);
+  z-index: 100;
+  animation: slideDown 0.3s ease-out;
+}
+
+.Search-Result.found {
+  background-color: var(--Primary);
+  color: white;
+  border: 1px solid var(--Accent);
+}
+
+.Search-Result.not-found {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.Search-Result button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.Search-Result button:hover {
+  opacity: 1;
+}
+
+@keyframes slideDown {
+  from { top: -50px; opacity: 0; }
+  to { top: 20px; opacity: 1; }
+}
